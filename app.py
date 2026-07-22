@@ -276,9 +276,9 @@ def cart():
 def checkout():
     return render_template("checkout.html")
 
-@app.route("/reservation")
-def reservation():
-    return render_template("reservation.html")
+@app.route("/reservations")
+def reservations():
+    return render_template("reservations.html")
 
 @app.route("/admin")
 def admin():
