@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Best Cafeteria</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        THE BEST <span>CAFETERIA</span>
+    </div>
+
+    <nav class="nav-links">
+    <a href="#home">Home</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="menu-icon">
+
+☰
+
+</div>
+
+<div class="search-box">
+
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search food..."
+        onkeypress="searchOnEnter(event)">
+
+    <button onclick="searchFood()">🔍</button>
+
+</div>
+
+<div class="cart-icon">
+
+    <a href="{{ url_for('cart') }}">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        Cart
+
+        <span id="cart-count">0</span>
+
+    </a>
+
+</div>
+
+<button id="theme-btn">
+🌙
+</button>
+
+</header>
+
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <h1>Welcome to The Best Cafeteria</h1>
+
+        <p>
+            Delicious Food • Fresh Coffee • Amazing Taste
+            <br>
+            Enjoy Burgers, Pizza, Momos, Sandwiches, Cakes,
+            Milkshakes and much more.
+        </p>
+
+        <a href="#menu" class="btn">Explore Menu</a>
+
+    </div>
+
+</section>
+
+<!-- ================= FOOD CATEGORIES ================= -->
+
+<section class="categories" id="menu">
+
+    <h2>Our Menu</h2>
+    <p>Freshly Prepared • Delicious • Hygienic</p>
+
+    <div class="category-container">
+
+    {% if foods %}
+
+        {% for food in foods %}
+
+        <div class="card searchable">
+
+            <img src="{{ url_for('static', filename='images/' + food.image) }}"
+                 alt="{{ food.food_name }}"
+                 onclick="openImage(this.src)">
+
+            <h3>{{ food.food_name }}</h3>
+
+            <p class="price">₹{{ "%.0f"|format(food.price) }}</p>
+
+            <button class="cart-btn"
+                onclick="addToCart({
+                    name:'{{ food.food_name }}',
+                    price:{{ food.price }},
+                    image:'{{ food.image }}'
+                })">
+
+                🛒 Add to Cart
+
+            </button>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h3 style="color:white;text-align:center;">
+            No food available.
+        </h3>
+
+    {% endif %}
+
+</div>
+
+</section>
+
+<a href="#contact" class="order-btn">Order Now</a>
+
+
+<!-- ================= FEATURED DISHES ================= -->
+
+<section class="featured">
+
+    <h2>Featured Dishes</h2>
+
+    <p>Customer's Favourite Food</p>
+
+    <div class="featured-container" id="featured-container">
+
+    </div>
+
+</section>
+
+<!-- ================= GALLERY ================= -->
+
+<section id="gallery" class="gallery">
+
+    <h2>Our Gallery</h2>
+
+    <div class="gallery-container">
+
+        <img src="{{ url_for('static', filename='images/chicken.png') }}" onclick="openImage(this.src)">
+
+        <img src="{{ url_for('static', filename='images/pasta.png') }}" onclick="openImage(this.src)">
+
+        <img src="{{ url_for('static', filename='images/cakes.png') }}" onclick="openImage(this.src)">
+
+    </div>
+
+    <a href="{{ url_for('gallery') }}" class="gallery-btn">
+        View Full Gallery →
+    </a>
+
+</section>
+
+<!-- ================= ABOUT US ================= -->
+
+<section class="about" id="about">
+
+    <div class="about-image">
+        <img src="{{ url_for('static', filename='images/hero.png') }}" onclick="openImage(this.src)">
+    </div>
+
+    <div class="about-content">
+
+        <h2>About The Best Cafeteria</h2>
+
+        <p>
+            At <strong>The Best Cafeteria</strong>, we believe that great food
+            brings people together. We serve fresh coffee, delicious meals,
+            homemade desserts, and refreshing beverages in a warm and
+            welcoming atmosphere.
+        </p>
+
+        <p>
+            Our experienced chefs prepare every dish using fresh ingredients
+            to ensure the highest quality and unforgettable taste.
+        </p>
+
+            </div>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section class="contact" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h3>The Best Cafeteria</h3>
+
+            <p>📍 Hyderabad, Telangana, India</p>
+
+            <p>📞 +91 9492138924</p>
+
+            <p>📧 info@thebestcafeteria.com</p>
+
+            <p>🕒 Open Every Day</p>
+            <p>09:00 AM - 11:00 PM</p>
+
+            <a href="https://wa.me/919492138924" class="whatsapp-btn">
+                💬 Chat on WhatsApp
+            </a>
+
+        </div>
+
+        <form class="contact-form">
+
+            <input type="text" placeholder="Your Name" required>
+
+            <input type="email" placeholder="Your Email" required>
+
+            <input type="tel" placeholder="Phone Number" required>
+
+            <textarea placeholder="Write Your Message" rows="6"></textarea>
+
+                <button type="submit">Send Message</button>
+
+        </form>
+
+    </div>
+
+</section>
+
+<section class="map">
+
+    <iframe
+        src="https://www.google.com/maps?q=Hyderabad&output=embed"
+        width="100%"
+        height="450"
+        style="border:0;"
+        loading="lazy">
+    </iframe>
+
+</section>
+
+<section class="reviews">
+
+<h2>Customer Reviews</h2>
+
+<div class="review-container">
+
+<div class="review-card">
+
+★★★★★
+
+<h3>Rahul Sharma</h3>
+
+<p>
+Amazing coffee and delicious burgers.
+Highly recommended.
+</p>
+
+</div>
+
+<div class="review-card">
+
+★★★★★
+
+<h3>Ayesha Khan</h3>
+
+<p>
+Beautiful place with tasty food and
+excellent customer service.
+</p>
+
+</div>
+
+<div class="review-card">
+
+★★★★★
+
+<h3>John David</h3>
+
+<p>
+Best cafeteria in town.
+Loved the milkshakes.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-box">
+
+            <h3>The Best Cafeteria</h3>
+
+            <p>
+                Serving fresh coffee, delicious food,
+                desserts and beverages with love.
+            </p>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h3>Quick Links</h3>
+
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+        <div class="footer-box">
+
+            <h3>Contact</h3>
+
+            <p>📍 Hyderabad, Telangana</p>
+            <p>📞 +91 9492138924</p>
+            <p>📧 info@thebestcafeteria.com</p>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <p class="copyright">
+        © 2026 The Best Cafeteria. All Rights Reserved.
+    </p>
+
+</footer>
+
+<div id="lightbox" class="lightbox">
+
+    <span class="close" onclick="closeImage()">&times;</span>
+
+    <img id="lightbox-img">
+
+</div>
+
+<button id="topBtn">↑</button>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+
+
+</body>
+</html>

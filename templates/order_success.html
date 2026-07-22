@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful | THE BEST CAFETERIA</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+
+    <h1 class="logo">THE BEST CAFETERIA</h1>
+
+</header>
+
+<section class="success-page">
+
+    <div class="success-box">
+
+        <h1>🎉 Order Placed Successfully!</h1>
+
+        <p>
+            Thank you for ordering from
+            <strong>THE BEST CAFETERIA</strong>.
+        </p>
+
+        <p>
+            Your order has been received and is being prepared.
+        </p>
+
+        <a href="{{ url_for('home') }}" class="checkout-btn">
+            Continue Shopping
+        </a>
+
+    </div>
+
+</section>
+
+</body>
+</html>

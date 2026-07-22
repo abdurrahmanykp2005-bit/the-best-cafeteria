@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart | The Best Cafeteria</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+
+        THE BEST <span>CAFETERIA</span>
+
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="{{ url_for('home') }}">Home</a>
+
+        <a href="{{ url_for('gallery') }}">Gallery</a>
+
+        <a href="{{ url_for('home') }}#menu">Menu</a>
+
+        <a href="{{ url_for('home') }}#contact">Contact</a>
+
+    </nav>
+
+</header>
+
+
+<section class="cart-page">
+
+    <div class="cart-header">
+
+        <h1>Your Shopping Cart</h1>
+
+        <p>
+            Review your selected food before checkout.
+        </p>
+
+    </div>
+
+
+    <div id="cart-items">
+
+        <!-- JavaScript loads cart here -->
+
+    </div>
+
+
+    <div class="cart-summary">
+
+        <div class="summary-card">
+
+            <h2>Order Summary</h2>
+
+            <hr>
+
+            <div class="summary-row">
+
+                <span>Total Amount</span>
+
+                <strong>
+
+                    ₹<span id="cart-total">0</span>
+
+                </strong>
+
+            </div>
+
+            <button
+                class="checkout-btn"
+                onclick="checkout()">
+
+                <i class="fa-solid fa-credit-card"></i>
+
+                Proceed To Checkout
+
+            </button>
+
+            <button
+                class="continue-btn"
+                onclick="window.location.href='{{ url_for('home') }}'">
+
+                <i class="fa-solid fa-utensils"></i>
+
+                Continue Shopping
+
+            </button>
+
+            <button
+                class="clear-btn"
+                onclick="clearCart()">
+
+                <i class="fa-solid fa-trash"></i>
+
+                Clear Cart
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div id="lightbox" class="lightbox">
+
+    <span class="close" onclick="closeImage()">
+
+        &times;
+
+    </span>
+
+    <img id="lightbox-img">
+
+</div>
+
+
+<button id="topBtn">
+
+    ↑
+
+</button>
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",()=>{
+
+    loadCart();
+
+});
+
+</script>
+
+</body>
+
+</html>

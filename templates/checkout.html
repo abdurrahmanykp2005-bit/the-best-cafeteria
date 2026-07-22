@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | THE BEST CAFETERIA</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo">THE BEST CAFETERIA</h1>
+
+    <nav>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('gallery') }}">Gallery</a>
+        <a href="{{ url_for('cart') }}">Cart</a>
+    </nav>
+</header>
+
+<section class="checkout-page">
+
+    <h2>Checkout</h2>
+
+    <form id="checkoutForm" onsubmit="return false;">
+
+        <input type="text" placeholder="Full Name" required>
+
+        <input type="tel" placeholder="Mobile Number" required>
+
+        <input type="email" placeholder="Email Address">
+
+        <textarea placeholder="Delivery Address" rows="4" required></textarea>
+
+        <textarea placeholder="Special Instructions (Optional)" rows="3"></textarea>
+
+        <select required>
+            <option value="">Select Payment Method</option>
+            <option>Cash on Delivery</option>
+            <option>UPI</option>
+            <option>Credit/Debit Card</option>
+        </select>
+
+       <button
+    type="button"
+    class="checkout-btn"
+    onclick="placeOrder()">
+    <i class="fa-solid fa-check"></i>
+    Place Order
+</button> 
+
+    </form>
+
+</section>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+<script>
+async function placeOrder() {
+
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    const paymentMethod =
+    document.querySelector("select").value || "Cash on Delivery";
+
+    const response = await fetch("/place-order", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            cart: cart,
+            payment_method: paymentMethod
+        })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+
+        localStorage.removeItem("cart");
+
+        window.location.href = result.redirect;
+
+    } else {
+
+        alert(result.message);
+
+    }
+
+}
+</script>
+
+</body>
+</html>

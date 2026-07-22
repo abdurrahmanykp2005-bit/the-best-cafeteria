@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Menu Management</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#111;
+    color:white;
+}
+
+.container{
+    width:90%;
+    margin:30px auto;
+}
+
+h1{
+    text-align:center;
+    color:gold;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:30px;
+}
+
+th{
+    background:gold;
+    color:black;
+    padding:15px;
+}
+
+td{
+    border:1px solid #555;
+    padding:12px;
+    text-align:center;
+}
+
+img{
+    width:70px;
+    border-radius:8px;
+}
+
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.delete{
+    background:red;
+    color:white;
+}
+
+.add{
+    background:green;
+    color:white;
+    margin-bottom:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Menu Management</h1>
+
+<a href="/admin-dashboard">
+<button class="add">
+Dashboard
+</button>
+</a>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+
+<th>Image</th>
+
+<th>Food</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Stock</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for food in foods %}
+
+<tr>
+
+<td>{{ food.id }}</td>
+
+<td>
+
+<img src="{{ url_for('static', filename='images/' + food.image) }}">
+
+</td>
+
+<td>{{ food.food_name }}</td>
+
+<td>{{ food.category }}</td>
+
+<td>₹{{ food.price }}</td>
+
+<td>{{ food.stock }}</td>
+
+<td>
+
+{% if food.is_available %}
+
+Available
+
+{% else %}
+
+Out of Stock
+
+{% endif %}
+
+</td>
+
+<td>
+
+<a href="/delete-food/{{ food.id }}">
+
+<button class="delete">
+
+Delete
+
+</button>
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

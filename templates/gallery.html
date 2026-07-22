@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Best Cafeteria | Gallery</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        THE BEST <span>CAFETERIA</span>
+    </div>
+
+    <nav class="nav-links">
+
+        <a href="{{ url_for('home') }}">Home</a>
+
+        <a href="{{ url_for('home') }}#menu">Menu</a>
+
+        <a href="{{ url_for('gallery') }}">Gallery</a>
+
+        <a href="{{ url_for('home') }}#about">About</a>
+
+        <a href="{{ url_for('home') }}#contact">Contact</a>
+
+    </nav>
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search Food..."
+            onkeyup="searchFood()">
+
+        <button onclick="searchFood()">🔍</button>
+
+    </div>
+
+    <button id="theme-btn">🌙</button>
+
+</header>
+
+<section class="gallery">
+
+    <h2>Complete Food Gallery</h2>
+
+    <p>Choose your favourite food and add it to your cart.</p>
+
+    <div class="gallery-container">
+
+        {% if foods %}
+
+            {% for food in foods %}
+
+            <div class="gallery-card searchable">
+
+                <img src="{{ url_for('static', filename='images/' + food.image) }}"
+                     alt="{{ food.food_name }}"
+                     onclick="openImage(this.src)">
+
+                <h3>{{ food.food_name }}</h3>
+
+                <p>₹{{ "%.0f"|format(food.price) }}</p>
+
+                <button class="cart-btn"
+                    onclick="addToCart({
+                        name:'{{ food.food_name }}',
+                        price:{{ food.price }},
+                        image:'{{ food.image }}'
+                    })">
+
+                    🛒 Add to Cart
+
+                </button>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <h2 style="color:white;text-align:center;width:100%;">
+                No food available.
+            </h2>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<div id="lightbox" class="lightbox">
+
+    <span class="close" onclick="closeImage()">&times;</span>
+
+    <img id="lightbox-img">
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>

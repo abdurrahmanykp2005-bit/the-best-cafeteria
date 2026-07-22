@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Users | Admin</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/style.css') }}">
+
+<style>
+
+table{
+
+width:90%;
+
+margin:40px auto;
+
+border-collapse:collapse;
+
+}
+
+table th{
+
+background:#c79a00;
+
+color:white;
+
+padding:15px;
+
+}
+
+table td{
+
+padding:12px;
+
+border:1px solid #ccc;
+
+text-align:center;
+
+}
+
+h1{
+
+text-align:center;
+
+margin-top:30px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Registered Users</h1>
+
+<table>
+
+<tr>
+
+<th>ID</th>
+
+<th>Full Name</th>
+
+<th>Email</th>
+
+<th>Mobile</th>
+
+<th>Address</th>
+
+</tr>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user.id }}</td>
+
+<td>{{ user.full_name }}</td>
+
+<td>{{ user.email }}</td>
+
+<td>{{ user.mobile }}</td>
+
+<td>{{ user.address }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</body>
+
+</html>

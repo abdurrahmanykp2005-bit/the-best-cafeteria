@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservations</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body style="background:#111;color:white;">
+
+<div style="width:90%;margin:auto;padding:40px;">
+
+<h1 style="text-align:center;color:#D4A373;">
+Table Reservations
+</h1>
+
+<table border="1"
+style="width:100%;border-collapse:collapse;text-align:center;">
+
+<tr style="background:#D4A373;color:black;">
+
+<th>ID</th>
+<th>Name</th>
+<th>Phone</th>
+<th>Email</th>
+<th>Date</th>
+<th>Time</th>
+<th>Guests</th>
+<th>Status</th>
+
+</tr>
+
+{% for reservation in reservations %}
+
+<tr>
+
+<td>{{ reservation.id }}</td>
+<td>{{ reservation.customer_name }}</td>
+<td>{{ reservation.phone }}</td>
+<td>{{ reservation.email }}</td>
+<td>{{ reservation.reservation_date }}</td>
+<td>{{ reservation.reservation_time }}</td>
+<td>{{ reservation.guests }}</td>
+<td>{{ reservation.status }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

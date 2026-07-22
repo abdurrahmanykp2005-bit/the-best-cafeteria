@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | The Best Cafeteria</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="admin-container">
+
+    <!-- ===========================
+            SIDEBAR
+    ============================ -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+
+            <h2>THE BEST</h2>
+
+            <span>CAFETERIA</span>
+
+        </div>
+
+        <ul class="sidebar-menu">
+
+            <li class="active">
+
+                <a href="/admin-dashboard">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/menu-management">
+
+                    <i class="fa-solid fa-utensils"></i>
+
+                    Food Management
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/orders">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/users">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    Customers
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/reservations">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Reservations
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/messages">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                    Messages
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/reports">
+
+                    <i class="fa-solid fa-chart-pie"></i>
+
+                    Reports
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/settings">
+
+                    <i class="fa-solid fa-gear"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/">
+
+                    <i class="fa-solid fa-globe"></i>
+
+                    Visit Website
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="/admin/logout">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- ===========================
+            MAIN CONTENT
+    ============================ -->
+
+    <main class="dashboard-main">
+
+        <!-- HEADER -->
+
+        <header class="dashboard-header">
+
+            <div class="header-left">
+
+                <h1>
+
+                    Welcome Admin 👋
+
+                </h1>
+
+                <p>
+
+                    Manage your cafeteria from one dashboard.
+
+                </p>
+
+            </div>
+
+            <div class="header-right">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Search...">
+
+                </div>
+
+                <button class="notification-btn">
+
+                    <i class="fa-solid fa-bell"></i>
+
+                </button>
+
+                <div class="admin-profile">
+
+                    <img
+                        src="{{ url_for('static', filename='images/admin.png') }}"
+                        alt="Admin">
+
+                    <div>
+
+                        <h4>Administrator</h4>
+
+                        <span>Super Admin</span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+        <!-- ===========================
+                STATISTICS
+        ============================ -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>{{ users }}</h2>
+
+                    <p>Total Customers</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-utensils"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>{{ menu }}</h2>
+
+                    <p>Food Items</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>{{ orders }}</h2>
+
+                    <p>Total Orders</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>{{ reservations }}</h2>
+
+                    <p>Reservations</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>{{ contacts }}</h2>
+
+                    <p>Messages</p>
+
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>₹{{ revenue }}</h2>
+
+                    <p>Total Revenue</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- PART 2 STARTS FROM HERE -->
+
+<!-- ===========================
+        DASHBOARD CONTENT
+=========================== -->
+
+<section class="dashboard-content">
+
+    <!-- LEFT SIDE -->
+
+    <div class="left-content">
+
+        <!-- Sales Overview -->
+
+        <div class="dashboard-box">
+
+            <div class="box-header">
+
+                <h2>Sales Overview</h2>
+
+                <select>
+
+                    <option>This Month</option>
+
+                    <option>Last Month</option>
+
+                    <option>This Year</option>
+
+                </select>
+
+            </div>
+
+            <div class="chart-placeholder">
+
+                <i class="fa-solid fa-chart-column"></i>
+
+                <p>Sales Chart</p>
+
+                <!-- Chart.js Graph Will Come Here -->
+
+                <canvas id="salesChart"></canvas>
+
+            </div>
+
+        </div>
+
+
+        <!-- Recent Orders -->
+
+        <div class="dashboard-box">
+
+            <div class="box-header">
+
+                <h2>Recent Orders</h2>
+
+                <a href="/orders">
+
+                    View All
+
+                </a>
+
+            </div>
+
+            <table class="orders-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Customer</th>
+
+                        <th>Food</th>
+
+                        <th>Amount</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for order in recent_orders %}
+
+                    <tr>
+
+                        <td>{{ order.id }}</td>
+
+                        <td>{{ order.customer }}</td>
+
+                        <td>{{ order.food }}</td>
+
+                        <td>₹{{ order.total }}</td>
+
+                        <td>
+
+                            <span class="status {{ order.status|lower }}">
+
+                                {{ order.status }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+
+    <div class="right-content">
+
+        <!-- Today's Revenue -->
+
+        <div class="small-card">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <h3>Today's Revenue</h3>
+
+            <h1>
+
+                ₹{{ today_revenue }}
+
+            </h1>
+
+        </div>
+
+        <!-- Today's Orders -->
+
+        <div class="small-card">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <h3>Today's Orders</h3>
+
+            <h1>
+
+                {{ today_orders }}
+
+            </h1>
+
+        </div>
+
+        <!-- Pending Orders -->
+
+        <div class="small-card">
+
+            <i class="fa-solid fa-clock"></i>
+
+            <h3>Pending Orders</h3>
+
+            <h1>
+
+                {{ pending_orders }}
+
+            </h1>
+
+        </div>
+
+        <!-- Completed Orders -->
+
+        <div class="small-card">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <h3>Completed Orders</h3>
+
+            <h1>
+
+                {{ completed_orders }}
+
+            </h1>
+
+        </div>
+
+        <!-- Latest Customers -->
+
+        <div class="dashboard-box">
+
+            <div class="box-header">
+
+                <h2>Latest Customers</h2>
+
+            </div>
+
+            <ul class="customer-list">
+
+                {% for user in latest_users %}
+
+                <li>
+
+                    <div>
+
+                        <strong>
+
+                            {{ user.name }}
+
+                        </strong>
+
+                        <br>
+
+                        <small>
+
+                            {{ user.email }}
+
+                        </small>
+
+                    </div>
+
+                    <span>
+
+                        New
+
+                    </span>
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- PART 3 STARTS BELOW -->
+
+<!-- ===========================
+        FOOD MANAGEMENT
+=========================== -->
+
+<section class="food-management">
+
+    <div class="box-header">
+
+        <h2>
+
+            🍔 Food Management
+
+        </h2>
+
+        <button class="add-food-btn">
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Food
+
+        </button>
+
+    </div>
+
+    <div class="food-search">
+
+        <input
+            type="text"
+            placeholder="Search food...">
+
+    </div>
+
+    <table class="food-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Image</th>
+
+                <th>Food Name</th>
+
+                <th>Category</th>
+
+                <th>Price</th>
+
+                <th>Status</th>
+
+                <th>Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for item in foods %}
+
+            <tr>
+
+                <td>
+
+                    <img
+                        src="{{ item.image }}"
+                        class="food-image">
+
+                </td>
+
+                <td>
+
+                    {{ item.name }}
+
+                </td>
+
+                <td>
+
+                    {{ item.category }}
+
+                </td>
+
+                <td>
+
+                    ₹{{ item.price }}
+
+                </td>
+
+                <td>
+
+                    <span class="food-status">
+
+                        Available
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button class="edit-btn">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                    </button>
+
+                    <button class="delete-btn">
+
+                        <i class="fa-solid fa-trash"></i>
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!-- ===========================
+        ADD FOOD MODAL
+=========================== -->
+
+<div class="modal">
+
+    <div class="modal-content">
+
+        <div class="box-header">
+
+            <h2>Add New Food</h2>
+
+            <button class="close-modal">
+
+                ✖
+
+            </button>
+
+        </div>
+
+        <form action="/add-food" method="POST" enctype="multipart/form-data">
+
+            <input
+                type="text"
+                name="name"
+                placeholder="Food Name"
+                required>
+
+            <input
+                type="number"
+                name="price"
+                placeholder="Price"
+                required>
+
+            <input
+                type="text"
+                name="category"
+                placeholder="Category"
+                required>
+
+            <textarea
+                name="description"
+                placeholder="Description"
+                rows="4"></textarea>
+
+            <input
+                type="file"
+                name="image">
+
+            <button
+                type="submit"
+                class="save-food-btn">
+
+                Save Food
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- PART 4 STARTS BELOW -->
+
+<!-- ===========================
+        CUSTOMER MANAGEMENT
+=========================== -->
+
+<section class="customer-management">
+
+    <div class="box-header">
+
+        <h2>
+
+            👥 Customer Management
+
+        </h2>
+
+        <a href="/users" class="view-all-btn">
+
+            View All
+
+        </a>
+
+    </div>
+
+    <table class="customer-table">
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Phone</th>
+
+                <th>Joined</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for user in latest_users %}
+
+            <tr>
+
+                <td>{{ user.id }}</td>
+
+                <td>{{ user.name }}</td>
+
+                <td>{{ user.email }}</td>
+
+                <td>{{ user.phone }}</td>
+
+                <td>{{ user.created_at }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!-- ===========================
+        RESERVATIONS
+=========================== -->
+
+<section class="reservation-management">
+
+    <div class="box-header">
+
+        <h2>
+
+            📅 Latest Reservations
+
+        </h2>
+
+        <a href="/reservations" class="view-all-btn">
+
+            View All
+
+        </a>
+
+    </div>
+
+    <table class="reservation-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Date</th>
+
+                <th>Time</th>
+
+                <th>Guests</th>
+
+                <th>Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for reservation in latest_reservations %}
+
+            <tr>
+
+                <td>{{ reservation.name }}</td>
+
+                <td>{{ reservation.date }}</td>
+
+                <td>{{ reservation.time }}</td>
+
+                <td>{{ reservation.guests }}</td>
+
+                <td>
+
+                    <span class="status pending">
+
+                        Pending
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+<!-- ===========================
+        CONTACT MESSAGES
+=========================== -->
+
+<section class="messages-management">
+
+    <div class="box-header">
+
+        <h2>
+
+            💬 Recent Messages
+
+        </h2>
+
+        <a href="/messages" class="view-all-btn">
+
+            View All
+
+        </a>
+
+    </div>
+
+    <table class="messages-table">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Subject</th>
+
+                <th>Date</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% for message in latest_messages %}
+
+            <tr>
+
+                <td>{{ message.name }}</td>
+
+                <td>{{ message.email }}</td>
+
+                <td>{{ message.subject }}</td>
+
+                <td>{{ message.date }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</section>
+
+</main>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+
+</html>
