@@ -1,0 +1,1061 @@
+/* ==========================================
+   THE BEST CAFETERIA
+   PREMIUM ADMIN DASHBOARD
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+body{
+    background:#0d0d0d;
+    color:#fff;
+}
+
+/* =========================
+      MAIN CONTAINER
+========================= */
+
+.admin-container{
+    display:flex;
+    min-height:100vh;
+    background:#111;
+}
+
+/* =========================
+        SIDEBAR
+========================= */
+
+.sidebar{
+    width:280px;
+    background:linear-gradient(180deg,#0b0b0b,#171717,#0b0b0b);
+    border-right:1px solid rgba(255,215,0,.15);
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    overflow-y:auto;
+    padding:30px 20px;
+    box-shadow:5px 0 30px rgba(0,0,0,.5);
+}
+
+.sidebar-logo{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.sidebar-logo h2{
+    color:#FFD700;
+    font-size:30px;
+    letter-spacing:3px;
+    font-weight:800;
+}
+
+.sidebar-logo span{
+    color:#ffffff;
+    font-size:15px;
+    letter-spacing:6px;
+}
+
+.sidebar-menu{
+    list-style:none;
+}
+
+.sidebar-menu li{
+    margin:10px 0;
+}
+
+.sidebar-menu li a{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px 18px;
+    color:#d7d7d7;
+    text-decoration:none;
+    border-radius:14px;
+    transition:.35s;
+    font-size:16px;
+}
+
+.sidebar-menu li a i{
+    width:24px;
+    text-align:center;
+    font-size:18px;
+}
+
+.sidebar-menu li a:hover{
+    background:#FFD700;
+    color:#111;
+    transform:translateX(6px);
+    box-shadow:0 0 18px rgba(255,215,0,.35);
+}
+
+.sidebar-menu li.active a{
+    background:#FFD700;
+    color:#111;
+    font-weight:700;
+}
+
+/* =========================
+      MAIN AREA
+========================= */
+
+.dashboard-main{
+    margin-left:280px;
+    width:calc(100% - 280px);
+    padding:35px;
+}
+
+/* =========================
+         HEADER
+========================= */
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,.05);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,215,0,.15);
+    padding:22px 30px;
+    border-radius:20px;
+    margin-bottom:35px;
+    box-shadow:0 10px 35px rgba(0,0,0,.35);
+}
+
+.header-left h1{
+    font-size:34px;
+    font-weight:800;
+    color:#FFD700;
+}
+
+.header-left p{
+    color:#bfbfbf;
+    margin-top:8px;
+    font-size:15px;
+}
+
+/* =========================
+       RIGHT HEADER
+========================= */
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+/* Search */
+
+.search-box{
+    display:flex;
+    align-items:center;
+    background:#1d1d1d;
+    border:1px solid rgba(255,215,0,.2);
+    border-radius:40px;
+    padding:12px 18px;
+}
+
+.search-box i{
+    color:#FFD700;
+    margin-right:10px;
+}
+
+.search-box input{
+    background:none;
+    border:none;
+    outline:none;
+    color:#fff;
+    width:220px;
+    font-size:15px;
+}
+
+/* Notification */
+
+.notification-btn{
+    width:52px;
+    height:52px;
+    border:none;
+    border-radius:50%;
+    background:#FFD700;
+    color:#111;
+    cursor:pointer;
+    font-size:20px;
+    transition:.3s;
+}
+
+.notification-btn:hover{
+    transform:scale(1.08);
+}
+
+/* Admin Profile */
+
+.admin-profile{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    background:#1b1b1b;
+    border:1px solid rgba(255,215,0,.2);
+    padding:10px 16px;
+    border-radius:50px;
+}
+
+.admin-profile img{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    border:3px solid #FFD700;
+    object-fit:cover;
+}
+
+.admin-profile h4{
+    color:#FFD700;
+    font-size:17px;
+}
+
+.admin-profile span{
+    color:#bdbdbd;
+    font-size:13px;
+}
+
+/* =========================
+      RESPONSIVE
+========================= */
+
+@media(max-width:992px){
+
+.sidebar{
+    width:90px;
+}
+
+.sidebar-logo span,
+.sidebar-menu li a span{
+    display:none;
+}
+
+.dashboard-main{
+    margin-left:90px;
+    width:calc(100% - 90px);
+}
+
+.dashboard-header{
+    flex-direction:column;
+    gap:20px;
+}
+
+.header-right{
+    width:100%;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.search-box input{
+    width:150px;
+}
+
+}
+
+@media(max-width:768px){
+
+.dashboard-main{
+    padding:20px;
+}
+
+.header-left h1{
+    font-size:26px;
+}
+
+.search-box{
+    width:100%;
+}
+
+.search-box input{
+    width:100%;
+}
+
+.admin-profile{
+    width:100%;
+    justify-content:center;
+}
+
+}
+
+/* ==========================================
+   PART 2 - PREMIUM STATISTICS CARDS
+========================================== */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.stat-card{
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:28px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#1a1a1a,#111111);
+    border:1px solid rgba(255,215,0,.15);
+    transition:.35s ease;
+    box-shadow:0 15px 30px rgba(0,0,0,.35);
+}
+
+.stat-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:5px;
+    height:100%;
+    background:#FFD700;
+}
+
+.stat-card:hover{
+    transform:translateY(-8px);
+    border-color:#FFD700;
+    box-shadow:0 18px 35px rgba(255,215,0,.18);
+}
+
+.stat-icon{
+    width:75px;
+    height:75px;
+    border-radius:20px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:32px;
+    color:#111;
+    background:#FFD700;
+    flex-shrink:0;
+}
+
+.stat-card h2{
+    font-size:34px;
+    color:#ffffff;
+    margin-bottom:6px;
+    font-weight:700;
+}
+
+.stat-card p{
+    color:#cfcfcf;
+    font-size:15px;
+}
+
+/* Decorative Glow */
+
+.stat-card::after{
+    content:"";
+    position:absolute;
+    right:-40px;
+    top:-40px;
+    width:120px;
+    height:120px;
+    background:rgba(255,215,0,.08);
+    border-radius:50%;
+}
+
+/* Revenue Card Highlight */
+
+.stat-card:last-child{
+    background:linear-gradient(135deg,#2a1d00,#151515);
+}
+
+.stat-card:last-child .stat-icon{
+    background:#ffffff;
+    color:#111;
+}
+
+/* Small Animation */
+
+@keyframes cardFade{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.stat-card{
+    animation:cardFade .6s ease;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.stats-grid{
+    grid-template-columns:1fr;
+}
+
+.stat-card{
+    padding:22px;
+}
+
+.stat-card h2{
+    font-size:28px;
+}
+
+.stat-icon{
+    width:65px;
+    height:65px;
+    font-size:28px;
+}
+
+}
+
+/* ==========================================
+   PART 3 - DASHBOARD CONTENT
+========================================== */
+
+.dashboard-content{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+    margin-bottom:35px;
+}
+
+.left-content,
+.right-content{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+/* Dashboard Boxes */
+
+.dashboard-box{
+    background:linear-gradient(145deg,#1b1b1b,#121212);
+    border:1px solid rgba(255,215,0,.15);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+/* Box Header */
+
+.box-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.box-header h2{
+    color:#FFD700;
+    font-size:24px;
+    font-weight:700;
+}
+
+.box-header a{
+    text-decoration:none;
+    color:#FFD700;
+    font-weight:600;
+    transition:.3s;
+}
+
+.box-header a:hover{
+    color:#fff;
+}
+
+.box-header select{
+    background:#111;
+    color:#fff;
+    border:1px solid rgba(255,215,0,.3);
+    border-radius:10px;
+    padding:10px 15px;
+}
+
+/* Chart */
+
+.chart-placeholder{
+    min-height:320px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border:2px dashed rgba(255,215,0,.25);
+    border-radius:18px;
+}
+
+.chart-placeholder i{
+    font-size:70px;
+    color:#FFD700;
+    margin-bottom:20px;
+}
+
+.chart-placeholder p{
+    color:#cccccc;
+    margin-bottom:20px;
+}
+
+#salesChart{
+    width:100%;
+    max-height:280px;
+}
+
+/* Recent Orders Table */
+
+.orders-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.orders-table th{
+    background:#FFD700;
+    color:#111;
+    padding:16px;
+    text-align:left;
+    font-size:15px;
+}
+
+.orders-table td{
+    padding:16px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.orders-table tr:hover{
+    background:#1d1d1d;
+}
+
+/* Status */
+
+.status{
+    padding:7px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.status.pending{
+    background:#ffb300;
+    color:#111;
+}
+
+.status.completed{
+    background:#2ecc71;
+    color:#fff;
+}
+
+.status.cancelled{
+    background:#e74c3c;
+    color:#fff;
+}
+
+/* Right Cards */
+
+.small-card{
+    background:linear-gradient(145deg,#1b1b1b,#111);
+    border:1px solid rgba(255,215,0,.15);
+    border-radius:20px;
+    text-align:center;
+    padding:30px;
+    transition:.35s;
+}
+
+.small-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(255,215,0,.18);
+}
+
+.small-card i{
+    font-size:42px;
+    color:#FFD700;
+    margin-bottom:15px;
+}
+
+.small-card h3{
+    color:#ddd;
+    margin-bottom:15px;
+    font-size:18px;
+}
+
+.small-card h1{
+    color:#fff;
+    font-size:38px;
+}
+
+/* Latest Customers */
+
+.customer-list{
+    list-style:none;
+}
+
+.customer-list li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.customer-list li:last-child{
+    border-bottom:none;
+}
+
+.customer-list strong{
+    color:#fff;
+}
+
+.customer-list small{
+    color:#999;
+}
+
+.customer-list span{
+    background:#FFD700;
+    color:#111;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+}
+
+/* Responsive */
+
+@media(max-width:1100px){
+
+.dashboard-content{
+    grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.orders-table{
+    display:block;
+    overflow-x:auto;
+}
+
+.box-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:15px;
+}
+
+.small-card h1{
+    font-size:30px;
+}
+
+}
+
+/* ==========================================
+   PART 4 - MANAGEMENT SECTIONS
+========================================== */
+
+.food-management,
+.customer-management,
+.reservation-management,
+.messages-management{
+    background:linear-gradient(145deg,#1a1a1a,#111);
+    border:1px solid rgba(255,215,0,.15);
+    border-radius:22px;
+    padding:30px;
+    margin-bottom:35px;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+/* Buttons */
+
+.add-food-btn,
+.view-all-btn,
+.save-food-btn{
+    background:#FFD700;
+    color:#111;
+    border:none;
+    padding:12px 22px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.add-food-btn:hover,
+.view-all-btn:hover,
+.save-food-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 10px 20px rgba(255,215,0,.35);
+}
+
+/* Search */
+
+.food-search{
+    margin:20px 0;
+}
+
+.food-search input{
+    width:100%;
+    padding:14px 18px;
+    background:#181818;
+    color:#fff;
+    border:1px solid rgba(255,215,0,.25);
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+/* Tables */
+
+.food-table,
+.customer-table,
+.reservation-table,
+.messages-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.food-table th,
+.customer-table th,
+.reservation-table th,
+.messages-table th{
+    background:#FFD700;
+    color:#111;
+    padding:16px;
+    text-align:left;
+    font-weight:700;
+}
+
+.food-table td,
+.customer-table td,
+.reservation-table td,
+.messages-table td{
+    padding:16px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.food-table tr:hover,
+.customer-table tr:hover,
+.reservation-table tr:hover,
+.messages-table tr:hover{
+    background:#1b1b1b;
+}
+
+/* Images */
+
+.food-image{
+    width:65px;
+    height:65px;
+    border-radius:12px;
+    object-fit:cover;
+    border:2px solid #FFD700;
+}
+
+/* Status */
+
+.food-status{
+    background:#27ae60;
+    color:#fff;
+    padding:7px 14px;
+    border-radius:25px;
+    font-size:13px;
+    font-weight:600;
+}
+
+/* Edit Delete */
+
+.edit-btn,
+.delete-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+    margin-right:8px;
+}
+
+.edit-btn{
+    background:#3498db;
+    color:#fff;
+}
+
+.delete-btn{
+    background:#e74c3c;
+    color:#fff;
+}
+
+.edit-btn:hover,
+.delete-btn:hover{
+    transform:scale(1.08);
+}
+
+/* Modal */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.75);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-content{
+    width:95%;
+    max-width:650px;
+    background:#181818;
+    border:1px solid rgba(255,215,0,.2);
+    border-radius:20px;
+    padding:30px;
+}
+
+.modal-content input,
+.modal-content textarea{
+    width:100%;
+    padding:14px;
+    margin-top:15px;
+    background:#111;
+    color:#fff;
+    border:1px solid rgba(255,215,0,.2);
+    border-radius:10px;
+    outline:none;
+}
+
+.close-modal{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    background:#e74c3c;
+    color:#fff;
+    cursor:pointer;
+    font-size:18px;
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.food-table,
+.customer-table,
+.reservation-table,
+.messages-table{
+    display:block;
+    overflow-x:auto;
+}
+
+.modal-content{
+    width:95%;
+}
+
+}
+
+/* ==========================================
+   PART 5 - PREMIUM FINISHING TOUCHES
+========================================== */
+
+/* Smooth Scroll */
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#0d0d0d;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#FFD700;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#ffcc00;
+}
+
+/* Text Selection */
+
+::selection{
+    background:#FFD700;
+    color:#111;
+}
+
+/* Fade Animation */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.dashboard-box,
+.stat-card,
+.small-card,
+.food-management,
+.customer-management,
+.reservation-management,
+.messages-management{
+    animation:fadeUp .6s ease;
+}
+
+/* Focus Effects */
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#FFD700 !important;
+    box-shadow:0 0 12px rgba(255,215,0,.35);
+}
+
+/* Links */
+
+a{
+    transition:.3s;
+}
+
+/* Button Hover */
+
+button{
+    transition:.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
+
+/* Cards */
+
+.dashboard-box:hover,
+.food-management:hover,
+.customer-management:hover,
+.reservation-management:hover,
+.messages-management:hover{
+    border-color:#FFD700;
+    box-shadow:0 20px 40px rgba(255,215,0,.12);
+}
+
+/* Tables */
+
+.orders-table tr,
+.food-table tr,
+.customer-table tr,
+.reservation-table tr,
+.messages-table tr{
+    transition:.3s;
+}
+
+.orders-table tr:hover,
+.food-table tr:hover,
+.customer-table tr:hover,
+.reservation-table tr:hover,
+.messages-table tr:hover{
+    transform:scale(1.01);
+}
+
+/* Logo */
+
+.sidebar-logo{
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(255,215,0,.15);
+}
+
+/* Active Sidebar */
+
+.sidebar-menu li.active a{
+    box-shadow:0 0 18px rgba(255,215,0,.35);
+}
+
+/* Images */
+
+.food-image,
+.admin-profile img{
+    transition:.35s;
+}
+
+.food-image:hover,
+.admin-profile img:hover{
+    transform:scale(1.08);
+}
+
+/* Notification */
+
+.notification-btn:hover{
+    box-shadow:0 0 20px rgba(255,215,0,.45);
+}
+
+/* Search */
+
+.search-box:hover{
+    border-color:#FFD700;
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.sidebar{
+    width:100%;
+    position:relative;
+    height:auto;
+}
+
+.dashboard-main{
+    width:100%;
+    margin-left:0;
+}
+
+.dashboard-header{
+    padding:20px;
+}
+
+.header-left{
+    text-align:center;
+}
+
+.header-right{
+    flex-direction:column;
+    align-items:stretch;
+}
+
+.search-box{
+    width:100%;
+}
+
+.search-box input{
+    width:100%;
+}
+
+.admin-profile{
+    justify-content:center;
+}
+
+.stat-card{
+    flex-direction:column;
+    text-align:center;
+}
+
+.small-card{
+    padding:25px;
+}
+
+}
+
+/* Footer Space */
+
+.dashboard-main{
+    padding-bottom:60px;
+}
