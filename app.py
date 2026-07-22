@@ -285,36 +285,6 @@ def admin():
     return render_template("Admin.html")
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-
-    if request.method == "POST":
-
-        email = request.form.get("email")
-        password = request.form.get("password")
-
-        user = User.query.filter_by(email=email).first()
-
-        if user and check_password_hash(user.password, password):
-
-            session["user_id"] = user.id
-            session["user_name"] = user.full_name
-
-            return redirect(url_for("home"))
-
-        flash("Invalid Email or Password")
-        return redirect(url_for("login"))
-
-    return render_template("login.html")
-
-@app.route("/logout")
-def logout():
-
-    session.clear()
-
-    return redirect("/")
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -348,8 +318,8 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        flash("Registration Successful! Please login.", "success")
-        return redirect(url_for("login"))
+        flash("Registration Successful!", "success")
+        return redirect(url_for("home"))
 
     return render_template("register.html")
 
@@ -357,7 +327,7 @@ def register():
 def profile():
 
     if "user_id" not in session:
-        return redirect("/login")
+        return redirect("/")
 
     return render_template(
         "profile.html",
@@ -369,7 +339,7 @@ def profile():
 def my_orders():
 
     if "user_id" not in session:
-        return redirect("/login")
+        return redirect("/")
 
     return render_template("my_orders.html")
 
@@ -378,18 +348,15 @@ def my_orders():
 def order_success():
 
     if "user_id" not in session:
-        return redirect("/login")
+        return redirect("/")
 
     return render_template("order_success.html")
 
 @app.route("/place-order", methods=["POST"])
 def place_order():
 
-    if "user_id" not in session:
-        return jsonify({
-            "success": False,
-            "message": "Please login first."
-        }), 401
+    # Allow guest orders
+session["user_id"] = 1
 
     data = request.get_json()
 
