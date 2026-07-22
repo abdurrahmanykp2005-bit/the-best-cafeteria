@@ -356,7 +356,7 @@ def order_success():
 def place_order():
 
     # Allow guest orders
-session["user_id"] = 1
+    session["user_id"] = 1
 
     data = request.get_json()
 
